@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: REST API Foundation
+  version: 1.0.0
+  description: Node.js + Express 기반 REST API 서버 골격
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Health
+    description: 서버 상태 확인
+  - name: Users
+    description: 사용자 리소스 예시
+paths:
+  /api/health:
+    get:
+      tags:
+        - Health
+      summary: 서버 상태 확인
+      responses:
+        "200":
+          description: 서버가 정상 동작 중입니다.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  timestamp:
+                    type: string
+                    format: date-time
+  /api/users:
+    get:
+      tags:
+        - Users
+      summary: 사용자 목록 조회
+      responses:
+        "200":
+          description: 사용자 목록
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/User"
+    post:
+      tags:
+        - Users
+      summary: 사용자 생성
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserRequest"
+      responses:
+        "201":
+          description: 생성된 사용자
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/User"
+        "400":
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /api/users/{userId}:
+    get:
+      tags:
+        - Users
+      summary: 사용자 상세 조회
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 사용자 상세 정보
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/User"
+        "404":
+          description: 사용자를 찾을 수 없음
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          type: string
+          example: u1
+        name:
+          type: string
+          example: Ada Lovelace
+        email:
+          type: string
+          format: email
+          example: ada@example.com
+    CreateUserRequest:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+          example: Grace Hopper
+        email:
+          type: string
+          format: email
+          example: grace@example.com
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User not found
+        details:
+          oneOf:
+            - type: object
+            - type: string
