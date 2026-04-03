@@ -1,6 +1,6 @@
-# Image Market API Mock
+# blockchain project
 
-Express-based mock API that follows the image marketplace flow from `상황.docx`.
+Express-based.
 
 ## Included endpoints
 
@@ -23,15 +23,6 @@ Express-based mock API that follows the image marketplace flow from `상황.docx
 - `POST /orders`
 - `POST /verification/check`
 
-## Mock auth tokens
-
-- Existing creator user: `Bearer access-token-photo-creator`
-- Existing seller user: `Bearer access-token-night-snapper`
-- Existing buyer user: `Bearer access-token-buyer`
-- New user signup flow: `Bearer new-user-token`
-- Forced unauthorized example: `Bearer invalid-token`
-
-`/users/signup` only succeeds for a token that does not already belong to a saved mock user.
 
 ## Swagger
 
