@@ -1,22 +1,25 @@
-import { createUser, getUserById, listUsers } from "./users.controller.js";
+import { listMyFavorites, listMyImages, signupUser } from "./users.controller.js";
 
 export const usersModule = {
-  basePath: "/api/users",
+  basePath: "/users",
   routes: [
     {
-      method: "get",
-      path: "/",
-      handler: listUsers,
-    },
-    {
-      method: "get",
-      path: "/:userId",
-      handler: getUserById,
-    },
-    {
       method: "post",
-      path: "/",
-      handler: createUser,
+      path: "/signup",
+      name: "Signup screen",
+      handler: signupUser,
+    },
+    {
+      method: "get",
+      path: "/me/images",
+      name: "My uploaded images screen",
+      handler: listMyImages,
+    },
+    {
+      method: "get",
+      path: "/me/favorites",
+      name: "Favorites screen",
+      handler: listMyFavorites,
     },
   ],
 };
