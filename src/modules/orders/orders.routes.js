@@ -1,3 +1,4 @@
+import { requireAuth } from "../../middlewares/requireAuth.js";
 import { createOrder } from "./orders.controller.js";
 
 export const ordersModule = {
@@ -8,6 +9,7 @@ export const ordersModule = {
       path: "/",
       name: "Purchase screen",
       handler: createOrder,
+      middlewares: [requireAuth],
     },
   ],
 };

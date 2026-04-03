@@ -1,9 +1,10 @@
-import { sendEndpointScaffold } from "../../lib/sendEndpointScaffold.js";
+import { createHttpError } from "../../lib/createHttpError.js";
+import { checkUploadedImage } from "../../lib/mockStore.js";
 
 export function checkVerification(req, res) {
-  return sendEndpointScaffold(req, res, {
-    method: "POST",
-    path: "/verification/check",
-    screen: "검증 화면",
-  });
+  if (!req.file) {
+    throw createHttpError(400, "Missing or invalid file.");
+  }
+
+  return res.status(200).json(checkUploadedImage(req.file));
 }

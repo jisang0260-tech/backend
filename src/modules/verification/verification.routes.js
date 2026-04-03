@@ -1,3 +1,5 @@
+import { requireAuth } from "../../middlewares/requireAuth.js";
+import { uploadSingleImage } from "../../middlewares/uploadImage.js";
 import { checkVerification } from "./verification.controller.js";
 
 export const verificationModule = {
@@ -8,6 +10,7 @@ export const verificationModule = {
       path: "/check",
       name: "Verification screen",
       handler: checkVerification,
+      middlewares: [requireAuth, uploadSingleImage],
     },
   ],
 };

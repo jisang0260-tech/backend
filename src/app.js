@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (_req, res) => {
   res.status(200).json({
-    message: "Image Market API scaffold is running.",
+    message: "Image Market API mock is running.",
     environment: env.nodeEnv,
     docsUrl: "/docs",
     openApiUrl: "/openapi.json",
