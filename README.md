@@ -1,6 +1,6 @@
 # blockchain project
 
-Express-based.
+Express-based./ google auth , hash value 는 추후에/
 
 ## Included endpoints
 
